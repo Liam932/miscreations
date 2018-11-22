@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Stage, Layer } from "react-konva";
+import data from "./monster/montser-data";
+import Monster from "./monster/monster";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const PER_ROW = 5;
+
+const App = () => (
+  <Stage width={window.innerWidth} height={window.innerHeight}>
+    <Layer>
+      {data.map((data, index) => (
+        <Monster
+          key={data.colour}
+          x={200 + (index % PER_ROW) * 200}
+          y={150 + Math.floor(index / PER_ROW) * 200}
+          genome={data}
+        />
+      ))}
+    </Layer>
+  </Stage>
+);
 
 export default App;
