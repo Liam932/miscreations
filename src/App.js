@@ -1,23 +1,26 @@
 import React from "react";
-import { Stage, Layer } from "react-konva";
-import data from "./monster/montser-data";
-import Monster from "./monster/monster";
+import CanvasContainer from './canvas/canvas-container';
+import { combineReducers, createStore } from 'redux';
+import { monsterReducer } from './monster/monster-redux';
+import { Provider } from "react-redux";
+import Nav from './nav/nav';
 
-const PER_ROW = 5;
+import '@blueprintjs/icons/lib/css/blueprint-icons.css'
+import '@blueprintjs/core/lib/css/blueprint.css'
+
+const rootReducer = combineReducers({monster: monsterReducer})
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+
 
 const App = () => (
-  <Stage width={window.innerWidth} height={window.innerHeight}>
-    <Layer>
-      {data.map((data, index) => (
-        <Monster
-          key={data.colour}
-          x={200 + (index % PER_ROW) * 200}
-          y={150 + Math.floor(index / PER_ROW) * 200}
-          genome={data}
-        />
-      ))}
-    </Layer>
-  </Stage>
+    <Provider store={store}>
+        <>
+            <Nav />
+            <CanvasContainer />
+        </>
+    </Provider>
 );
 
 export default App;
