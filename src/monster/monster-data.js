@@ -1,3 +1,5 @@
+const uuidv4 = require('uuid/v4');
+
 export function getRandomInt(min, max) {
   return (
     Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) +
@@ -15,6 +17,7 @@ export function createMonsterData(n) {
       const colour = getRandomColour();
       const eyeColour = getRandomColour();
       return {
+        id: uuidv4(),
         sides,
         colour,
         eyeColour
