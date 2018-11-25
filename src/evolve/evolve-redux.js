@@ -2,6 +2,7 @@ import { createInitialPopulation, calculateFitnessOfIndividual } from 'evolvejs/
 import { createEvolutionPipeline } from 'evolvejs/dist/pipeline';
 import uuid from 'uuid/v4';
 import { initMonsters, getSelectedMonsters } from '../monster/monster-redux';
+import _get from 'lodash/get';
 
 //Constants
 export const ID = 'EVOLVE';
@@ -37,11 +38,16 @@ export const evolveReducer = (state = INITIAL_STATE, { type, payload } = {}) => 
 
 //Selectors
 
-export const getSchema = state => state.evolve.schema
-export const getMutationRate = state => state.evolve.mutationRate
-export const getSelection = state => state.evolve.selection
-export const getPopulationSize = state => state.evolve.populationSize
-export const getPopulation = state => state.evolve.population
+export const getSchema = state => state.evolve.schema;
+export const getMutationRate = state => state.evolve.mutationRate;
+export const getSelection = state => state.evolve.selection;
+export const getPopulationSize = state => state.evolve.populationSize;
+export const getPopulation = state => state.evolve.population;
+export const findIdInPopulation = (state, props) => state.evolve.population.find(p => p.id === props.genome.id);
+export const getFitnessOfIndividual = (state, props) => {
+    const individual = findIdInPopulation(state, props);
+    return individual ? individual.fitness : null;
+}
 
 //Actions
 
@@ -49,7 +55,8 @@ const combination = (ind1, ind2) => ({ sides: Math.round((ind1.sides + ind2.side
 
 const problemFn = (...individuals) => ind => {
     const averageSides = (individuals.reduce((acc, i) => acc + i.sides, 0)) / individuals.length;
-    const fitness = 1 / (Math.abs(averageSides - ind.sides) || 1);
+    const fitness = 1 / (Math.abs(averageSides - ind.sides) || 0.01); //Problem here
+    console.log(averageSides, ind.sides, fitness)
     return fitness
 }
 
