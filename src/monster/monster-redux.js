@@ -5,10 +5,10 @@ export const INIT_MONSTERS = 'MONSTER/INIT_MONSTERS';
 export const SELECT_MONSTER = 'MONSTER/SELECT';
 
 //Actions
-export const initMonsters = () => ({
+export const initMonsters = (data = []) => ({
     type: INIT_MONSTERS,
     payload: {
-        monsters: createMonsterData(15)
+        monsters: data.map(createMonsterData)
     }
 });
 
@@ -45,3 +45,4 @@ export const monsterReducer = (state = INITIAL_STATE, {type, payload} = {}) => {
 
 export const getMonsters = state => Object.values(state.monster.monsters);
 export const isMonsterSelected = (state, props) => state.monster.selected.includes(props.genome.id);
+export const getSelectedMonsters = state => state.monster.selected.map(id => state.monster.monsters[id]);
