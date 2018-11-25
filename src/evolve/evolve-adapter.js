@@ -1,5 +1,4 @@
-import { createInitialPopulation, calculateFitnessOfIndividual } from 'evolvejs/dist/population';
-import { createEvolutionPipeline } from 'evolvejs/dist/pipeline';
+import { createInitialPopulation, calculateFitnessOfIndividual, createEvolutionPipeline } from 'evolvejs';
 
 export const SELECTION = [{ type: "tournament" }, { type: "tournament" }];
 
