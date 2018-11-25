@@ -6,7 +6,7 @@ const MonsterBody =({ genome, x, y } = {}) => (
     x={x}
     y={y}
     sides={genome.sides}
-    radius={70}
+    radius={genome.bodySize}
     fill={genome.colour}
     stroke="black"
     strokeWidth={4}
