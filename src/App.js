@@ -1,5 +1,5 @@
 import React from "react";
-import CanvasContainer from './canvas/canvas-container';
+import PopulationGridContainer from './population/population-grid-container';
 import { Provider } from "react-redux";
 import Nav from './nav/nav';
 import store from './redux-store';
@@ -12,7 +12,7 @@ const App = () => (
     <Provider store={store}>
         <>
             <Nav />
-            <CanvasContainer />
+            <PopulationGridContainer />
         </>
     </Provider>
 );
