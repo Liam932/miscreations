@@ -34,7 +34,7 @@ export const monsterReducer = (state = INITIAL_STATE, {type, payload} = {}) => {
             if(state.selected.includes(payload.id)) return state;
             return {
                 ...state,
-                selected: [...state.selected, payload.id]
+                selected: [payload.id, ...state.selected,]
             };
         default:
             return state;
